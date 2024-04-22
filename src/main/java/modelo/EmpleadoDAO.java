@@ -5,50 +5,48 @@
  */
 package modelo;
 
-import controlador.Cursos;
+import controlador.Empleado;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
  * @author visitante
  */
-public class CursosDAO {
+public class EmpleadoDAO {
 
-    private static final String SQL_SELECT = "SELECT codigo_curso, nombre_curso, estatus_curso FROM cursos";
-    private static final String SQL_INSERT = "INSERT INTO cursos(codigo_curso, nombre_curso, estatus_curso) VALUES(?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE cursos SET nombre_curso=?, estatus_curso=? WHERE codigo_curso = ?";
-    private static final String SQL_DELETE = "DELETE FROM cursos WHERE codigo_curso=?";
-    private static final String SQL_QUERY = "SELECT codigo_curso, nombre_curso, estatus_curso FROM cursos WHERE codigo_curso = ?";
+    private static final String SQL_SELECT = "SELECT id_empleado, nombre_empleado, dire_empleado FROM empleado";
+    private static final String SQL_INSERT = "INSERT INTO empleado(nombre_empleado, dire_empleado) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE empleado SET nombre_empleado=?, dire_empleado=? WHERE id_empleado = ?";
+    private static final String SQL_DELETE = "DELETE FROM empleado WHERE id_empleado=?";
+    private static final String SQL_QUERY = "SELECT id_empleado, nombre_empleado, dire_empleado FROM empleado WHERE id_empleado = ?";
 
-    public List<Cursos> select() {
+    public List<Empleado> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Cursos curso = null;
-        List<Cursos> cursos = new ArrayList<Cursos>();
+        Empleado empleado = null;
+        List<Empleado> empleados = new ArrayList<Empleado>();
 
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                String codigo = rs.getString("codigo_curso");
-                String nombre = rs.getString("nombre_curso");
-                String estatus = rs.getString("estatus_curso");
+                int id_empleado = rs.getInt("id_empleado");
+                String nombre = rs.getString("nombre_empleado");
+                String direccion = rs.getString("dire_empleado");
                 
-                curso = new Cursos();
-                curso.setCodigo_curso(codigo);
-                curso.setNombre_curso(nombre);
-                curso.setEstatus_curso(estatus);
+                empleado = new Empleado();
+                empleado.setId_empleado(id_empleado);
+                empleado.setNombreEmpleado(nombre);
+                empleado.setDireEmpleado(direccion);
                 
-                cursos.add(curso);
+                empleados.add(empleado);
             }
 
         } catch (SQLException ex) {
@@ -59,19 +57,20 @@ public class CursosDAO {
             Conexion.close(conn);
         }
 
-        return cursos;
+        return empleados;
     }
 
-    public int insert(Cursos curso) {
+    public int insert(Empleado empleado) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, curso.getCodigo_curso());
-            stmt.setString(2, curso.getNombre_curso());
-            stmt.setString(3, curso.getEstatus_curso());
+            stmt.setString(1, empleado.getNombreEmpleado());
+            stmt.setString(2, empleado.getDireEmpleado());
+
+
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
@@ -85,7 +84,7 @@ public class CursosDAO {
         return rows;
     }
 
-    public int update(Cursos curso) {
+    public int update(Empleado empleado) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -94,9 +93,9 @@ public class CursosDAO {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, curso.getNombre_curso());
-            stmt.setString(2, curso.getEstatus_curso());
-            stmt.setString(3, curso.getCodigo_curso());
+            stmt.setString(1, empleado.getNombreEmpleado());
+            stmt.setString(2, empleado.getDireEmpleado());
+            
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -111,7 +110,7 @@ public class CursosDAO {
         return rows;
     }
 
-    public int delete(Cursos curso) {
+    public int delete(Empleado empleado) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -120,7 +119,7 @@ public class CursosDAO {
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setString(1, curso.getCodigo_curso());
+            stmt.setInt(1, empleado.getId_empleado());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -133,32 +132,33 @@ public class CursosDAO {
         return rows;
     }
 
-//    public List<Persona> query(Persona vendedor) { // Si se utiliza un ArrayList
-    public Cursos query(Cursos curso) {    
+//    public List<Persona> query(Persona empleado) { // Si se utiliza un ArrayList
+    public Empleado query(Empleado empleado) {    
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
+        List<Empleado> empleados = new ArrayList<Empleado>();
         int rows = 0;
 
         try {
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setString(1, curso.getCodigo_curso());
+            stmt.setInt(1, empleado.getId_empleado());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                String codigo = rs.getString("codigo_curso");
-                String nombre = rs.getString("nombre_curso");
-                String estatus = rs.getString("estatus_curso");
+                int id_empleado = rs.getInt("id_empleado");
+                String nombre = rs.getString("nombre_empleado");
+                String direccion = rs.getString("dire_empleado");
                 
-                curso = new Cursos();
-                curso.setCodigo_curso(codigo);
-                curso.setNombre_curso(nombre);
-                curso.setEstatus_curso(estatus);
-        
+                empleado = new Empleado();
+                empleado.setId_empleado(id_empleado);
+                empleado.setNombreEmpleado(nombre);
+                empleado.setDireEmpleado(direccion);
+                
+                //empleados.add(empleado); // Si se utiliza un ArrayList
             }
-            //System.out.println("Registros buscado:" + vendedor);
+            //System.out.println("Registros buscado:" + empleado);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
@@ -166,7 +166,9 @@ public class CursosDAO {
             Conexion.close(stmt);
             Conexion.close(conn);
         }
-        return curso;
+
+        //return empleados;  // Si se utiliza un ArrayList
+        return empleado;
     }
-        
+    
 }

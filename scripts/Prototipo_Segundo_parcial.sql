@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS usuario (
 ENGINE = InnoDB CHARACTER SET = latin1;
 -- -----------------------------------------------------
 -- Table `educativo`.`habitacion`
--- -----------------------------------------------------
+-- ---------------------------------------------usuario--------
 CREATE TABLE habitacion
  (
   id_habitacion VARCHAR(15),
