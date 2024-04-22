@@ -5,9 +5,7 @@
  */
 package vista;
 
-import modelo.EmpleadoDAO;
 import modelo.CursosDAO;
-import controlador.Empleado;
 import controlador.Cursos;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
