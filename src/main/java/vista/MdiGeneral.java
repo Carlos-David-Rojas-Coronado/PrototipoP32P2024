@@ -43,7 +43,6 @@ public class MdiGeneral extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -97,14 +96,6 @@ public class MdiGeneral extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem3);
 
-        jMenuItem4.setText("Mantenimiento Alumnos");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem4);
-
         jMenu1.add(jMenu3);
 
         jMenuBar1.add(jMenu1);
@@ -151,15 +142,6 @@ public class MdiGeneral extends javax.swing.JFrame {
     private void menuAbrir_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrir_sesionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuAbrir_sesionActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-        MantenimientoAlumnos ventana = new MantenimientoAlumnos();
-        jDesktopPane1.add(ventana);
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana.getSize();
-        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,7 +190,6 @@ public class MdiGeneral extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem menuAbrir_sesion;
     private javax.swing.JMenuItem menuCerrar_sesion;
     // End of variables declaration//GEN-END:variables
