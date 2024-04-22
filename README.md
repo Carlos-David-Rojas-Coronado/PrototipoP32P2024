@@ -1,1 +1,2 @@
-# PrototipoP32P2024
+# proyectop32k24
+Proyecto final curso de programacion III UMG
