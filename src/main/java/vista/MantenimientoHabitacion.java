@@ -345,7 +345,6 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        cbox_empleado.setSelectedIndex(0);
         txtID.setText("");
         txtTipohabitacion.setText("");
         txtTipocama.setText("");
